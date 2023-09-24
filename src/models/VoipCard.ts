@@ -9,9 +9,8 @@ export class VoipCard extends Card {
         adapterType: string,
         balance: number,
         status: string,
-        subscription: Subscription
     ) {
-        super(id, balance, status, subscription);
+        super(id, balance, status);
         this.adapterType = adapterType;
     }
 }

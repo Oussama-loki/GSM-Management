@@ -10,10 +10,9 @@ export class GsmCard extends Card {
         phoneNumber: string,
         authenticationKey: string,
         balance: number,
-        status: string,
-        subscription: Subscription
+        status: string
     ) {
-        super(id, balance, status, subscription);
+        super(id, balance, status);
         this.phoneNumber = phoneNumber;
         this.authenticationKey = authenticationKey;
     }

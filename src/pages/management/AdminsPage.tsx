@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import { getAdminBoard } from "../../services/user.service";
 import EventBus from "../../common/eventBus";
-import { Admin } from "../../models/admin";
+import { Admin } from "../../models/Admin";
 
 const mockData: Admin[] = [
     {

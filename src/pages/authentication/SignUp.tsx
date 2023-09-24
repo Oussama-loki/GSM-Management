@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
-import IUser from "../../models/user";
+import IUser from "../../models/IUser";
 import { signUp } from "../../services/auth.service";
 
 const SignUpPage: React.FC = () => {
@@ -16,6 +16,20 @@ const SignUpPage: React.FC = () => {
     };
 
     const validationSchema = Yup.object().shape({
+        firstName: Yup.string()
+            .required("This field is required!"),
+        lastName: Yup.string()
+            .required("This field is required!"),
+        phoneNumber: Yup.string()
+            .test(
+                "len",
+                "The phone number must be between 10 and 15 characters.",
+                (val: any) =>
+                    val &&
+                    val.toString().length >= 10 &&
+                    val.toString().length <= 15
+            )
+            .required("This field is required!"),
         username: Yup.string()
             .test(
                 "len",
@@ -67,9 +81,8 @@ const SignUpPage: React.FC = () => {
         <div className="col-md-12">
             <div className="card card-container">
                 <img
-                    src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+                    src="https://www.radeema.ma/documents/20181/29122/logo"
                     alt="profile-img"
-                    className="profile-img-card"
                 />
                 <Formik
                     initialValues={initialValues}
@@ -79,6 +92,36 @@ const SignUpPage: React.FC = () => {
                     <Form>
                         {!successful && (
                             <div>
+                                <div className="form-group">
+                                    <label htmlFor="firstName"> First Name </label>
+                                    <Field name="firstName" type="text" className="form-control" />
+                                    <ErrorMessage
+                                        name="firstName"
+                                        component="div"
+                                        className="alert alert-danger"
+                                    />
+                                </div>
+
+                                <div className="form-group">
+                                    <label htmlFor="lastName"> Last Name </label>
+                                    <Field name="lastName" type="text" className="form-control" />
+                                    <ErrorMessage
+                                        name="lastName"
+                                        component="div"
+                                        className="alert alert-danger"
+                                    />
+                                </div>
+
+                                <div className="form-group">
+                                    <label htmlFor="phoneNumber"> Phone Number </label>
+                                    <Field name="phoneNumber" type="text" className="form-control" />
+                                    <ErrorMessage
+                                        name="phoneNumber"
+                                        component="div"
+                                        className="alert alert-danger"
+                                    />
+                                </div>
+
                                 <div className="form-group">
                                     <label htmlFor="username"> Username </label>
                                     <Field name="username" type="text" className="form-control" />
@@ -111,6 +154,24 @@ const SignUpPage: React.FC = () => {
                                         component="div"
                                         className="alert alert-danger"
                                     />
+                                </div>
+
+                                <div className="input-group mb-3">
+                                    <div className="input-group-prepend">
+                                        <div className="input-group-text">
+                                            <input type="checkbox" aria-label="Checkbox for following text input" />
+                                        </div>
+                                    </div>
+                                    <span className="form-control" aria-label="Text input with checkbox">Admin</span>
+                                </div>
+
+                                <div className="input-group mb-3">
+                                    <div className="input-group-prepend">
+                                        <div className="input-group-text">
+                                            <input type="checkbox" aria-label="Checkbox for following text input" />
+                                        </div>
+                                    </div>
+                                    <span className="form-control" aria-label="Text input with checkbox">Operator Employee</span>
                                 </div>
 
                                 <div className="form-group">

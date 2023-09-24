@@ -2,48 +2,33 @@ import React, { useState, useEffect } from "react";
 
 import { getOperatorEmployeeBoard } from "../../services/user.service";
 import EventBus from "../../common/eventBus";
-import { Employee } from "../../models/Employee";
+import { VoipCard } from "../../models/VoipCard";
 
-const mockData: Employee[] = [
-    new Employee(
-        1,
-        "Oussama",
-        "Loukili Idrissi",
-        "(+212) 00000000",
-        "test@company.ma",
-        234,
-        new Date("2019-02-16"),
-        "IT",
-        "Manager"
-    ),
-    new Employee(
-        8,
-        "Anas",
-        "Mourad",
-        "(+212) 00000000",
-        "test@company.ma",
-        452,
-        new Date("2022-01-24"),
-        "Operations",
-        "Manager"
-    ),
-    new Employee(
-        10,
-        "Imad",
-        "Maailil",
-        "(+212) 00000000",
-        "test@company.ma",
-        755,
-        new Date("2011-11-22"),
-        "IT",
-        "Engineer"
-    ),
+const mockData: VoipCard[] = [
+    {
+        id: 1,
+        adapterType: "PCI VoIP Adapter",
+        balance: 500,
+        status: "ACTIVE"
+    },
+    {
+        id: 2,
+        adapterType: "Analog Telephone Adapter",
+        balance: 0,
+        status: "DISABLED"
+    },
+    {
+        id: 3,
+        adapterType: "SIP Trunking Adapter",
+        balance: 600,
+        status: "INACTIVE"
+    },
     // Add more items as needed
 ];
 
-const EmployeesPage: React.FC = () => {
+const VoipCardsPage: React.FC = () => {
     const [content, setContent] = useState<string>("");
-    const [items, setItems] = useState<Employee[]>(mockData);
+    const [items, setItems] = useState<VoipCard[]>(mockData);
 
     useEffect(() => {
         getOperatorEmployeeBoard().then(
@@ -74,21 +59,17 @@ const EmployeesPage: React.FC = () => {
                 (
                     <>
                         <header className="jumbotron">
-                            <h3>Employees</h3>
+                            <h3>VOIP Cards</h3>
                         </header>
-                        <div>
+                        <div className="container">
                             <table className="table">
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th>Phone Number</th>
-                                        <th>Email</th>
-                                        <th>Employee ID</th>
-                                        <th>Join Date</th>
-                                        <th>Departement</th>
-                                        <th>Position</th>
+                                        <th>Adapter Type</th>
+                                        <th>Balance</th>
+                                        <th>Status</th>
+                                        <th>Assigned To</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -96,15 +77,12 @@ const EmployeesPage: React.FC = () => {
                                     {items.map((item) => (
                                         <tr key={item.id}>
                                             <td>{item.id}</td>
-                                            <td>{item.firstName}</td>
-                                            <td>{item.lastName}</td>
-                                            <td>{item.phoneNumber}</td>
-                                            <td>{item.email}</td>
-                                            <td>{item.employeeId}</td>
-                                            <td>{item.joinDate.toDateString()}</td>
-                                            <td>{item.departement}</td>
-                                            <td>{item.position}</td>
+                                            <td>{item.adapterType}</td>
+                                            <td>{item.balance}</td>
+                                            <td>{item.status}</td>
+                                            <td>No one</td>
                                             <td>
+                                                <button className="btn btn-success mr-3">Assign To Employee</button>
                                                 <button className="btn btn-primary mr-3">Edit</button>
                                                 <button className="btn btn-danger">Delete</button>
                                             </td>
@@ -125,4 +103,4 @@ const EmployeesPage: React.FC = () => {
     );
 };
 
-export default EmployeesPage;
+export default VoipCardsPage;

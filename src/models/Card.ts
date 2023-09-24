@@ -4,17 +4,14 @@ export class Card {
     id: number;
     balance: number;
     status: string;
-    subscription: Subscription | null
 
     constructor(
         id: number,
         balance: number,
-        status: string,
-        subscription: Subscription | null
+        status: string
     ) {
         this.id = id;
         this.balance = balance;
         this.status = status;
-        this.subscription = subscription;
     }
 }

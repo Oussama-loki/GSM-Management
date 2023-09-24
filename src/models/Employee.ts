@@ -1,4 +1,4 @@
-import { GsmCard } from "./gsmCard";
+import { GsmCard } from "./GsmCard";
 import { Person } from "./Person";
 import { VoipCard } from "./VoipCard";
 
